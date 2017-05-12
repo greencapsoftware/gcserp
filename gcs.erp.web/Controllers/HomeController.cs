@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using gcs.erp.web.Model.Containers;
 
 namespace gcs.erp.web.Controllers
 {
@@ -10,7 +11,10 @@ namespace gcs.erp.web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            if (!SessaoContainer.Conectado())
+                return RedirectToAction("Index", "Login");
+            else
+                return View();
         }
 
         public IActionResult About()
